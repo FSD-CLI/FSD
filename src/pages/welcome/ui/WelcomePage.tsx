@@ -1,8 +1,6 @@
-import {
-  TemplateFeatures,
-  TemplateHero,
-  TemplateStructure,
-} from "@/widgets";
+import { TemplateFeatures } from "@/widgets/template-features";
+import { TemplateHero } from "@/widgets/template-hero";
+import { TemplateStructure } from "@/widgets/template-structure";
 
 export function WelcomePage() {
   return (

@@ -1,5 +1,5 @@
 import { Card } from "@/shared/ui";
-import { templateInfo } from "@/shared/config/template-info";
+import { templateInfo } from "@/shared/config";
 
 export function TemplateFeatures() {
   return (
