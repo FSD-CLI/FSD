@@ -6,8 +6,11 @@ export function TemplateHero() {
     <section className="mx-auto grid max-w-6xl gap-8 px-5 pb-12 pt-10 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:pb-16 lg:pt-16">
       <div className="space-y-6">
         <div className="flex flex-wrap gap-2">
-          <Badge tone="blue">React + Vite</Badge>
+          <Badge tone="blue">{templateInfo.framework}</Badge>
           <Badge tone="green">Feature-Sliced Design</Badge>
+          {templateInfo.stack.map((item) => (
+            <Badge key={item}>{item}</Badge>
+          ))}
         </div>
         <div className="space-y-4">
           <h1 className="max-w-3xl text-4xl font-bold leading-tight text-slate-950 sm:text-5xl lg:text-6xl">

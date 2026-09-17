@@ -1,3 +1,12 @@
+import { fsdStack } from "./fsd-stack";
+
+const selectedStack: readonly string[] = [
+  fsdStack.apiClient,
+  fsdStack.serverState,
+  fsdStack.clientState,
+  fsdStack.forms,
+];
+
 export type TemplateFeature = {
   title: string;
   description: string;
@@ -19,7 +28,15 @@ export const templateInfo = {
   name: "FSD Architecture Starter",
   intro:
     "A React, Vite, and TypeScript starter template organized around Feature-Sliced Design layers.",
-  commands: ["npm install", "npm run dev", "npm run build"],
+  framework: fsdStack.frameworkLabel,
+  stack: selectedStack.filter((item) => item !== "none"),
+  commands: [
+    fsdStack.commands.install,
+    fsdStack.commands.dev,
+    fsdStack.commands.generateFeature,
+    fsdStack.commands.generatePage,
+  ],
+  docsUrl: fsdStack.docsUrl,
   layers: [
     {
       name: "app",
