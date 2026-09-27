@@ -64,6 +64,7 @@ npm audit --omit=dev
 
 If this project helps you, you can optionally support its development:
 
+- [GitHub Sponsors](https://github.com/sponsors/ashrafmo-1?frequency=one-time&sponsor=ashrafmo-1)
 - [Buy Me a Coffee](https://buymeacoffee.com/ashrafqopiah)
 - **InstaPay (Egypt):** `ashrafmo-1`
 
