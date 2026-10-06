@@ -1,0 +1,9 @@
+documentation:
+  - changed-files:
+      - any-glob-to-any-file: ['**/*.md']
+source:
+  - changed-files:
+      - any-glob-to-any-file: ['src/**']
+ci:
+  - changed-files:
+      - any-glob-to-any-file: ['.github/**']

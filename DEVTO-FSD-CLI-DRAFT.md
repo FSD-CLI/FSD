@@ -17,11 +17,11 @@ At the beginning, almost every folder structure looks reasonable. Then the proje
 
 That is the problem I wanted to reduce with **create-fsd-architecture**.
 
-It is an open-source CLI that creates frontend projects with a complete [Feature-Sliced Design structure]({{FSD_OFFICIAL_DOCS_URL}}), remembers the stack selected for the project, and generates framework-aware slices later without asking the same setup questions again.
+It is an open-source CLI that creates frontend projects with a complete [Feature-Sliced Design structure](https://feature-sliced.design), remembers the stack selected for the project, and generates framework-aware slices later without asking the same setup questions again.
 
-The project is available on [npm]({{NPM_URL}}), and the source code is on [GitHub]({{GITHUB_URL}}).
+The project is available on [npm](https://www.npmjs.com/package/create-fsd-architecture), and the source code is on [GitHub](https://github.com/FSD-CLI/cli).
 
-> This article describes version `2.5.0`, the current release at the time of writing.
+> This draft describes the published `2.6.1` package, verified on October 6, 2026. Changes in open PRs are identified separately and are not part of that npm artifact.
 
 ## What is a CLI?
 
@@ -32,7 +32,7 @@ Instead of opening a visual setup screen and configuring a project manually, you
 For example:
 
 ```bash
-npx create-fsd-architecture@latest my-app
+npx create-fsd-architecture@2.6.1 my-app
 ```
 
 That command starts an interactive setup where you can choose:
@@ -66,26 +66,26 @@ It is intentionally opinionated. The point is not to generate every possible pro
 
 ## Supported frameworks
 
-The current release includes five stable templates:
+The registry lists five supported templates. This describes scaffolding support; application security and deployment require separate verification:
 
 | Template ID | Framework | Template source |
 | --- | --- | --- |
-| `react-vite` | React + Vite | [Open template]({{REACT_VITE_TEMPLATE_URL}}) |
-| `nextjs` | Next.js with App Router | [Open template]({{NEXTJS_TEMPLATE_URL}}) |
-| `vue-vite` | Vue + Vite | [Open template]({{VUE_VITE_TEMPLATE_URL}}) |
-| `nuxt` | Nuxt 4 | [Open template]({{NUXT_TEMPLATE_URL}}) |
-| `sveltekit` | SvelteKit | [Open template]({{SVELTEKIT_TEMPLATE_URL}}) |
+| `react-vite` | React + Vite | [Open template](https://github.com/FSD-CLI/FSD) |
+| `nextjs` | Next.js with App Router | [Open template](https://github.com/FSD-CLI/FSD-NEXTJS) |
+| `vue-vite` | Vue + Vite | [Open template](https://github.com/FSD-CLI/fsd-vue) |
+| `nuxt` | Nuxt 4 | [Open template](https://github.com/FSD-CLI/fsd-nuxt) |
+| `sveltekit` | SvelteKit | [Open template](https://github.com/FSD-CLI/fsd-sveltekit) |
 
 You can inspect the available templates at any time:
 
 ```bash
-npx create-fsd-architecture@latest --list-templates
+npx create-fsd-architecture@2.6.1 --list-templates
 ```
 
 Or select one directly:
 
 ```bash
-npx create-fsd-architecture@latest my-app --framework nextjs
+npx create-fsd-architecture@2.6.1 my-app --framework nextjs
 ```
 
 ## A complete FSD structure from day one
@@ -133,7 +133,7 @@ Every framework supports these package managers:
 For repeatable local automation, CI, or demos, every important choice can be passed as a flag:
 
 ```bash
-npx create-fsd-architecture@latest my-app \
+npx create-fsd-architecture@2.6.1 my-app \
   --framework react-vite \
   --package-manager pnpm \
   --api-client fetch \
@@ -182,10 +182,10 @@ The CLI currently supports four generator types:
 Examples:
 
 ```bash
-npx create-fsd-architecture@latest --generate feature checkout
-npx create-fsd-architecture@latest -g entity product
-npx create-fsd-architecture@latest -g widget navbar
-npx create-fsd-architecture@latest -g page settings
+npx create-fsd-architecture@2.6.1 --generate feature checkout
+npx create-fsd-architecture@2.6.1 -g entity product
+npx create-fsd-architecture@2.6.1 -g widget navbar
+npx create-fsd-architecture@2.6.1 -g page settings
 ```
 
 Each generated slice gets a public API through its root `index.ts`. The files inside the slice are adapted to the selected framework and stack.
@@ -195,7 +195,7 @@ Each generated slice gets a public API through its root `index.ts`. The files in
 Authentication is usually bigger than one login form, so `feature auth` is treated as a complete flow:
 
 ```bash
-npx create-fsd-architecture@latest -g feature auth
+npx create-fsd-architecture@2.6.1 -g feature auth
 ```
 
 It generates the UI and supporting files for:
@@ -208,7 +208,7 @@ It generates the UI and supporting files for:
 
 Depending on the saved stack, the generated feature can also include typed form components, Zod schemas, query mutations, API functions, and the selected client-state integration.
 
-The output is framework-native. React and Next.js receive React components, Vue and Nuxt receive Vue components, and SvelteKit receives Svelte components with its selected form and state contracts.
+These are frontend scaffolds and example API contracts, not a deployed authentication backend. Connect and test your provider, session lifecycle, authorization and recovery flows before deployment. The output is framework-native. React and Next.js receive React components, Vue and Nuxt receive Vue components, and SvelteKit receives Svelte components with its selected form and state contracts.
 
 ## Page generation also updates routing
 
@@ -231,7 +231,7 @@ You should be able to see what a generator intends to change before it writes an
 For project creation:
 
 ```bash
-npx create-fsd-architecture@latest my-app \
+npx create-fsd-architecture@2.6.1 my-app \
   --framework vue-vite \
   --yes \
   --dry-run
@@ -240,7 +240,7 @@ npx create-fsd-architecture@latest my-app \
 For slice generation:
 
 ```bash
-npx create-fsd-architecture@latest -g page settings --dry-run
+npx create-fsd-architecture@2.6.1 -g page settings --dry-run
 ```
 
 The CLI prints the project or file plan and does not change the filesystem.
@@ -252,7 +252,7 @@ Existing projects and slices are protected by default.
 If a target already exists, the CLI stops instead of silently replacing it. You must pass `--force` when replacement is intentional:
 
 ```bash
-npx create-fsd-architecture@latest -g feature checkout --force
+npx create-fsd-architecture@2.6.1 -g feature checkout --force
 ```
 
 Forced replacement is transactional. The previous target is backed up, and if generation or setup fails, the CLI restores the original state.
@@ -266,9 +266,9 @@ Project paths are also checked so a project name cannot escape the current worki
 The CLI includes three inspection commands:
 
 ```bash
-npx create-fsd-architecture@latest check
-npx create-fsd-architecture@latest doctor
-npx create-fsd-architecture@latest config
+npx create-fsd-architecture@2.6.1 check
+npx create-fsd-architecture@2.6.1 doctor
+npx create-fsd-architecture@2.6.1 config
 ```
 
 ### `check`
@@ -293,7 +293,7 @@ The CLI also:
 - Removes the template's `origin` remote
 - Configures Husky hooks
 - Adds Commitlint with the Conventional Commits configuration
-- Runs linting and builds through the generated Git hooks
+- Runs linting and builds through the published 2.6.1 Git hooks; the new light-hook policy is candidate work, not part of this pinned package
 - Installs dependencies with the selected package manager when requested
 
 If dependencies are installed during the interactive flow, the CLI verifies that Commitlint rejects an invalid commit message before completing setup.
@@ -327,72 +327,71 @@ This boundary is one of the most important parts of the project: shared architec
 
 ```bash
 # Create a project interactively
-npx create-fsd-architecture@latest my-app
+npx create-fsd-architecture@2.6.1 my-app
 
 # Show help and version
-npx create-fsd-architecture@latest --help
-npx create-fsd-architecture@latest --version
+npx create-fsd-architecture@2.6.1 --help
+npx create-fsd-architecture@2.6.1 --version
 
 # List templates
-npx create-fsd-architecture@latest --list-templates
+npx create-fsd-architecture@2.6.1 --list-templates
 
 # Create without prompts
-npx create-fsd-architecture@latest my-app \
+npx create-fsd-architecture@2.6.1 my-app \
   --framework react-vite \
   --yes \
   --no-install \
   --no-start
 
 # Generate slices
-npx create-fsd-architecture@latest -g feature auth
-npx create-fsd-architecture@latest -g entity product
-npx create-fsd-architecture@latest -g widget header
-npx create-fsd-architecture@latest -g page dashboard
+npx create-fsd-architecture@2.6.1 -g feature auth
+npx create-fsd-architecture@2.6.1 -g entity product
+npx create-fsd-architecture@2.6.1 -g widget header
+npx create-fsd-architecture@2.6.1 -g page dashboard
 
 # Preview without writing
-npx create-fsd-architecture@latest -g page dashboard --dry-run
+npx create-fsd-architecture@2.6.1 -g page dashboard --dry-run
 
 # Inspect the current project
-npx create-fsd-architecture@latest check
-npx create-fsd-architecture@latest doctor
-npx create-fsd-architecture@latest config
+npx create-fsd-architecture@2.6.1 check
+npx create-fsd-architecture@2.6.1 doctor
+npx create-fsd-architecture@2.6.1 config
 ```
 
 ## Requirements
 
 - Node.js 20 or later for the CLI
-- Node.js 22.22.2 or later for generated Nuxt and SvelteKit projects
+- Use a Node version compatible with the generated framework and its resolved dependencies. Exact minimum patches are still being validated; the published React/Next artifact smoke used Node 22.23.0 on Ubuntu.
 
 ## Current validation status
 
-For version `2.5.0`:
+For published `2.6.1`, React/Vite and Next.js artifact smoke passed with npm on Ubuntu: install, creation, all four generator types, inspection and generated-project quality/build. [Exact artifact smoke](https://github.com/FSD-CLI/cli/actions/runs/37403029632).
 
-- The CLI test suite contains 35 tests.
-- The CI matrix runs the CLI on Node.js 20, 22, and 24.
-- Framework smoke jobs create, extend, validate, and build all five templates.
-- Package-manager smoke jobs create and build the React + Vite template with npm, pnpm, Yarn, and Bun.
+Source verification is separate: CLI main `c05ef594` passed 84 tests and pack validation; open [PR #6](https://github.com/FSD-CLI/cli/pull/6) passed 93 tests and its 28 checks at `0318943`. The candidate adds immutable template refs and provenance. Those changes are unmerged and unpublished.
 
-You can inspect the current workflow runs and their exact results on [GitHub Actions]({{CI_URL}}).
+The CLI source matrix covers Node 20/22/24 and Linux/macOS/Windows; framework builds run on Ubuntu. This is not a complete framework × package-manager × operating-system runtime certification. Current Nuxt production dependency findings remain unresolved; Nuxt is not cleared for a production-readiness claim. Browser behavior, integrations and application security require project-specific acceptance.
+
+Read the dated [release status](https://github.com/FSD-CLI/cli/blob/codex/roadmap-quick-wins/docs/RELEASE-STATUS.md) for scope and remaining checks.
 
 ## What this tool is — and what it is not
 
 `create-fsd-architecture` is an opinionated project scaffolder and code generator built around Feature-Sliced Design.
 
-It is not a replacement for understanding architecture. It is also not the official Feature-Sliced Design CLI. The methodology, concepts, and official learning resources belong to the Feature-Sliced Design project, which you can explore in the [official documentation]({{FSD_OFFICIAL_DOCS_URL}}).
+It is not a replacement for understanding architecture. It is also not the official Feature-Sliced Design CLI. The methodology, concepts, and official learning resources belong to the Feature-Sliced Design project, which you can explore in the [official documentation](https://feature-sliced.design).
 
 The CLI focuses on a different problem: turning an architectural decision into a repeatable project workflow across multiple frontend frameworks.
 
 ## Try it
 
 ```bash
-npx create-fsd-architecture@latest my-app
+npx create-fsd-architecture@2.6.1 my-app
 ```
 
 Then explore the generated structure, inspect `fsd.config.json`, and try adding a page or feature.
 
-If you find a bug, an unsupported use case, or a generator that could be improved, open an issue on [GitHub]({{ISSUES_URL}}). You can also read the [changelog]({{CHANGELOG_URL}}) to follow each release.
+If you find a bug, an unsupported use case, or a generator that could be improved, open an issue on [GitHub](https://github.com/FSD-CLI/cli/issues). You can also read the [changelog](https://github.com/FSD-CLI/cli/blob/main/docs/CHANGELOG.md) to follow each release.
 
-For a visual walkthrough, watch the [demo video]({{DEMO_VIDEO_URL}}).
+A recorded walkthrough is still awaiting production and a final video URL. This draft is not yet published.
 
 If the project helps you, you can support its continued development [here]({{SUPPORT_URL}}).
 
@@ -404,15 +403,15 @@ I would especially like feedback from developers already using FSD:
 
 ## Links
 
-- [npm package]({{NPM_URL}})
-- [GitHub repository]({{GITHUB_URL}})
-- [Documentation]({{DOCS_URL}})
-- [Official Feature-Sliced Design documentation]({{FSD_OFFICIAL_DOCS_URL}})
-- [Changelog]({{CHANGELOG_URL}})
-- [Issues and feature requests]({{ISSUES_URL}})
-- [CI status]({{CI_URL}})
-- [Demo video]({{DEMO_VIDEO_URL}})
-- [Roadmap]({{ROADMAP_URL}})
-- [Author on GitHub]({{AUTHOR_GITHUB_URL}})
+- [npm package](https://www.npmjs.com/package/create-fsd-architecture)
+- [GitHub repository](https://github.com/FSD-CLI/cli)
+- [Documentation](https://fsdcli.me)
+- [Official Feature-Sliced Design documentation](https://feature-sliced.design)
+- [Changelog](https://github.com/FSD-CLI/cli/blob/main/docs/CHANGELOG.md)
+- [Issues and feature requests](https://github.com/FSD-CLI/cli/issues)
+- [CI status](https://github.com/FSD-CLI/cli/actions)
+- Demo video: awaiting recording and final URL
+- [Roadmap](https://app.notion.com/p/3e7608c78c7d81059958d75b9203904b)
+- [Author on GitHub](https://github.com/ashrafmo-1)
 - [Author on LinkedIn]({{AUTHOR_LINKEDIN_URL}})
 - [Support the project]({{SUPPORT_URL}})
