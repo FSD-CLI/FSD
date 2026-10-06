@@ -3,6 +3,13 @@
 An opinionated React, Vite, and TypeScript starter with the complete
 Feature-Sliced Design layer structure ready from the first commit.
 
+## Validation scope
+
+This is a starter template. Repository quality checks cover the checked-in
+example; production deployment requires validating your application, runtime,
+API integration, authentication, and hosting configuration. CLI support and
+release verification are documented at [fsdcli.me](https://fsdcli.me).
+
 ## Quick Start with fsd
 
 ```bash
