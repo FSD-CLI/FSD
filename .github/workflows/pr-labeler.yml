@@ -10,6 +10,7 @@ on:
 permissions:
   contents: read
   pull-requests: write
+  issues: write
 
 jobs:
   label:
@@ -17,5 +18,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Read label configuration
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout: .github/labeler.yml
+          sparse-checkout-cone-mode: false
       - name: Label PR
         uses: actions/labeler@v6
