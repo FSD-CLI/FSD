@@ -20,10 +20,13 @@ jobs:
       - name: Create Pull Request
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HEAD_BRANCH: ${{ github.ref_name }}
         run: |
-          gh pr view "${{ github.ref_name }}" --base main || \
-          gh pr create \
-            --base main \
-            --head "${{ github.ref_name }}" \
-            --title "chore: merge ${{ github.ref_name }} into main" \
-            --body "Auto-created PR from \`${{ github.ref_name }}\` to \`main\`."
+          existing_prs=$(gh pr list --base main --head "$HEAD_BRANCH" --state open --json number --jq 'length')
+          if [ "$existing_prs" -eq 0 ]; then
+            gh pr create \
+              --base main \
+              --head "$HEAD_BRANCH" \
+              --title "chore: merge $HEAD_BRANCH into main" \
+              --body "Auto-created PR from \`$HEAD_BRANCH\` to \`main\`."
+          fi
