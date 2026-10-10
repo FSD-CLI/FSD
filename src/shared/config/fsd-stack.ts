@@ -7,7 +7,7 @@ export const fsdStack = {
   serverState: "react-query",
   clientState: "zustand",
   forms: "react-hook-form-zod",
-  docsUrl: "https://fsd-docs.vercel.app",
+  docsUrl: "https://fsdcli.me",
   commands: {
     install: "npm install",
     dev: "npm run dev",
