@@ -3,6 +3,15 @@
 An opinionated React, Vite, and TypeScript starter with the complete
 Feature-Sliced Design layer structure ready from the first commit.
 
+## Validation scope
+
+This repository is a starter. Architecture, lint, types and build checks cover
+the template; application-specific security, authentication, backend integration
+and deployment require separate validation. Passing template checks does not
+certify production deployment. See the
+[current CLI release status](https://github.com/FSD-CLI/cli/blob/main/docs/RELEASE-STATUS.md)
+for tested combinations and remaining gaps.
+
 ## Quick Start with fsd
 
 ```bash
