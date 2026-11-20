@@ -25,4 +25,4 @@ jobs:
           sparse-checkout: .github/labeler.yml
           sparse-checkout-cone-mode: false
       - name: Label PR
-        uses: actions/labeler@v6
+        uses: actions/labeler@v7
